@@ -21,7 +21,7 @@ namespace PotterBookstore.Tests
         [Test]
         public void WhenNoBooksInBasket_CostShouldBe0()
         {
-            int totalPrice = order.getTotalPrice();
+            double totalPrice = order.getTotalPrice();
             Assert.AreEqual(0, totalPrice);
         }
 
@@ -29,7 +29,7 @@ namespace PotterBookstore.Tests
         public void WhenOneBookInBasket_CostShouldBe8Dollars()
         {
             order.AddBook(Book.FirstBook);
-            int totalPrice = order.getTotalPrice();
+            double totalPrice = order.getTotalPrice();
             Assert.AreEqual(8, totalPrice);
         }
 
@@ -38,8 +38,28 @@ namespace PotterBookstore.Tests
         {
             order.AddBook(Book.FirstBook);
             order.AddBook(Book.FirstBook);
-            int totalPrice = order.getTotalPrice();
+            double totalPrice = order.getTotalPrice();
             Assert.AreEqual(16, totalPrice);
+        }
+
+        [Test]
+        public void WhenTwoDifferentBooksInBasket_CostShouldBeWith5PercentsDiscount()
+        {
+            order.AddBook(Book.FirstBook);
+            order.AddBook(Book.SecondBook);
+            double totalPrice = order.getTotalPrice();
+            Assert.AreEqual(15.2, totalPrice);
+        }
+
+        [Test]
+        public void WhenTwoCopiesOfTwoDifferentBooksInBasket_OnlyTwoOfThemGet5PercentDiscount()
+        {
+            order.AddBook(Book.FirstBook);
+            order.AddBook(Book.FirstBook);
+            order.AddBook(Book.SecondBook);
+            order.AddBook(Book.SecondBook);
+            double totalPrice = order.getTotalPrice();
+            Assert.AreEqual(31.2, totalPrice);
         }
 
 

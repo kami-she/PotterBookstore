@@ -12,9 +12,25 @@ namespace PotterBookstore
 
         private readonly List<Book> books = new List<Book>();
 
-        public int getTotalPrice()
+        public double getTotalPrice()
         {
-            return books.Count * 8;
+            double totalPrice = 0;
+            int numberOfBooks = books.Count;
+
+            HashSet<Book> booksWithoutRepeats = new HashSet<Book>(books);
+            int numberOfUniqueBooks = booksWithoutRepeats.Count;
+
+            if (numberOfUniqueBooks == 2)
+                totalPrice += numberOfUniqueBooks * OneBookPrice * 0.95;
+
+            int numberOfBooksWithoutDiscount = books.Count;
+
+            if (numberOfUniqueBooks > 1)
+                numberOfBooksWithoutDiscount -= numberOfUniqueBooks;
+
+            totalPrice += numberOfBooksWithoutDiscount * 8;
+
+            return totalPrice;
         }
 
         public void AddBook(Book book)
