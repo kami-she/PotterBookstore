@@ -19,7 +19,7 @@ namespace PotterBookstore.Tests
         }
 
         [Test]
-        public void WhenNoBooksInBasket_CostShouldBeNull()
+        public void WhenNoBooksInBasket_CostShouldBe0()
         {
             int totalPrice = order.getTotalPrice();
             Assert.AreEqual(0, totalPrice);

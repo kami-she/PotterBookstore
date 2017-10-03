@@ -8,8 +8,9 @@ namespace PotterBookstore
 {
     public sealed class BookOrder
     {
-        private readonly List<Book> books = new List<Book>();
         private const int OneBookPrice = 8;
+
+        private readonly List<Book> books = new List<Book>();
 
         public int getTotalPrice()
         {
