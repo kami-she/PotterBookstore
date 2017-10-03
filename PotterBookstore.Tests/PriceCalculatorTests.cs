@@ -172,6 +172,24 @@ namespace PotterBookstore.Tests
 
             Assert.AreEqual(65.6, totalPrice);
         }
+
+        [Test]
+        [TestCase(new int[] { 0, 1, 2, 3, 6 }, ExpectedResult = 70)]
+        [TestCase(new int[] { 0, 1, 3, 4 }, ExpectedResult = 59.2)]
+        public decimal WhenDifferentBooksWithSomeRepeatsInBasket_OnlyCostOfFirstCopiesOfBooksShouldBeWithDiscount(
+            int[] bookNumbers)
+        {
+            foreach (int number in bookNumbers)
+            {
+                basket.AddProduct(PotterBookProductGenerator.bookList[number], 2);
+            }
+
+            underTest = new PriceCalculator(basket, discountHelper);
+
+            decimal totalPrice = underTest.GetTotalPrice();
+
+            return totalPrice;
+        }
     }
 }
 

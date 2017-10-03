@@ -10,7 +10,7 @@ namespace PotterBookstore
     {
         private string name;
 
-        private int price;
+        private decimal price;
 
         public BookProduct(string name, int price)
         {
@@ -18,7 +18,7 @@ namespace PotterBookstore
             this.price = price;
         }
  
-        public int Price
+        public decimal Price
         {
             get { return price; }
         }
@@ -26,6 +26,18 @@ namespace PotterBookstore
         public string Name
         {
             get { return name; }
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj.GetType() != typeof(BookProduct)) return false;
+            var book = (BookProduct)obj;
+            return this.Name == book.Name && this.Price == book.Price;
+        }
+
+        public override int GetHashCode()
+        {
+            return Name.GetHashCode() + Price.GetHashCode();
         }
     }
 }

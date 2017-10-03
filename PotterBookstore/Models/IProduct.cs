@@ -8,7 +8,7 @@ namespace PotterBookstore
 {
     public interface IProduct
     {
-        int Price { get; }
+        decimal Price { get; }
 
         string Name { get; }
     }

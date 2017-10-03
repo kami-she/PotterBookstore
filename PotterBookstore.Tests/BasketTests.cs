@@ -14,7 +14,7 @@ namespace PotterBookstore.Tests
         }
 
         [Test]
-        public void WhenAddProductToBasket_ShouldAddProductCorrectly()
+        public void WhenAddProductToBasket_ShouldReturnCorrectProductsCount()
         {
             Assert.AreEqual(0, underTest.GetBasketProducts.Count);
 
