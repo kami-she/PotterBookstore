@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PotterBookstore
 {
@@ -12,37 +9,44 @@ namespace PotterBookstore
 
         private readonly Dictionary<Book, int> books = new Dictionary<Book, int>();
 
-        public double getTotalPrice()
+        public decimal getTotalPrice()
         {
-            double totalPrice = 0;
+            decimal totalPrice = 0;
 
             int numberOfUniqueBooks = GetNumberOfUniqueBooks();
 
-            if (numberOfUniqueBooks > 1)
+            if (numberOfUniqueBooks > 1 && numberOfUniqueBooks < 5)
             {
-                double discountSize = 1 - 0.05 * (numberOfUniqueBooks - 1);
+                decimal discountSize = (decimal) (1 - 0.05 * (numberOfUniqueBooks - 1));
+                totalPrice += numberOfUniqueBooks * OneBookPrice * discountSize;
+            }
+            else if (numberOfUniqueBooks > 1 && numberOfUniqueBooks >= 5)
+            {
+                decimal discountSize = (decimal) (1 - 0.05 * numberOfUniqueBooks);
                 totalPrice += numberOfUniqueBooks * OneBookPrice * discountSize;
             }
 
             int numberOfBooksWithoutDiscount = GetNumberOfBooks();
 
             if (numberOfUniqueBooks > 1)
+            { 
                 numberOfBooksWithoutDiscount -= numberOfUniqueBooks;
+            }
 
             totalPrice += numberOfBooksWithoutDiscount * 8;
 
             return totalPrice;
         }
 
-        public void AddBook(Book book)
+        public void AddBook(Book book, int amount = 1)
         {
             if (books.ContainsKey(book))
             {
-                books[book]++;
+                books[book]+= amount;
             }
             else
             {
-                books.Add(book, 1);
+                books.Add(book, amount);
             }
         }
 
@@ -51,7 +55,7 @@ namespace PotterBookstore
             return books.Sum(x => x.Value);
         }
 
-        public int GetNumberOfUniqueBooks()
+        private int GetNumberOfUniqueBooks()
         {
             return books.Count;
         }

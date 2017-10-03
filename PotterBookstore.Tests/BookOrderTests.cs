@@ -1,9 +1,4 @@
 ﻿using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PotterBookstore.Tests
 {
@@ -21,7 +16,7 @@ namespace PotterBookstore.Tests
         [Test]
         public void WhenNoBooksInBasket_CostShouldBe0()
         {
-            double totalPrice = order.getTotalPrice();
+            decimal totalPrice = order.getTotalPrice();
             Assert.AreEqual(0, totalPrice);
         }
 
@@ -29,7 +24,7 @@ namespace PotterBookstore.Tests
         public void WhenOneBookInBasket_CostShouldBe8Dollars()
         {
             order.AddBook(Book.FirstBook);
-            double totalPrice = order.getTotalPrice();
+            decimal totalPrice = order.getTotalPrice();
             Assert.AreEqual(8, totalPrice);
         }
 
@@ -38,7 +33,7 @@ namespace PotterBookstore.Tests
         {
             order.AddBook(Book.FirstBook);
             order.AddBook(Book.FirstBook);
-            double totalPrice = order.getTotalPrice();
+            decimal totalPrice = order.getTotalPrice();
             Assert.AreEqual(16, totalPrice);
         }
 
@@ -47,7 +42,7 @@ namespace PotterBookstore.Tests
         {
             order.AddBook(Book.FirstBook);
             order.AddBook(Book.SecondBook);
-            double totalPrice = order.getTotalPrice();
+            decimal totalPrice = order.getTotalPrice();
             Assert.AreEqual(15.2, totalPrice);
         }
 
@@ -58,7 +53,7 @@ namespace PotterBookstore.Tests
             order.AddBook(Book.FirstBook);
             order.AddBook(Book.SecondBook);
             order.AddBook(Book.SecondBook);
-            double totalPrice = order.getTotalPrice();
+            decimal totalPrice = order.getTotalPrice();
             Assert.AreEqual(31.2, totalPrice);
         }
 
@@ -68,19 +63,71 @@ namespace PotterBookstore.Tests
             order.AddBook(Book.FirstBook);
             order.AddBook(Book.SecondBook);
             order.AddBook(Book.ThirdBook);
-            double totalPrice = order.getTotalPrice();
+            decimal totalPrice = order.getTotalPrice();
             Assert.AreEqual(21.6, totalPrice);
         }
 
         [Test]
-        public void WhenFourDifferentBooksInBasket_CostShouldBeWith20PercentsDiscount()
+        public void WhenFourDifferentBooksInBasket_CostShouldBeWith15PercentsDiscount()
         {
             order.AddBook(Book.FirstBook);
             order.AddBook(Book.SecondBook);
             order.AddBook(Book.ThirdBook);
             order.AddBook(Book.SixthBook);
-            double totalPrice = order.getTotalPrice();
+            decimal totalPrice = order.getTotalPrice();
             Assert.AreEqual(27.2, totalPrice);
+        }
+
+        [Test]
+        public void WhenFiveDifferentBooksInBasket_CostShouldBeWith25PercentsDiscount()
+        {
+            order.AddBook(Book.FirstBook);
+            order.AddBook(Book.SecondBook);
+            order.AddBook(Book.ThirdBook);
+            order.AddBook(Book.FifthBook);
+            order.AddBook(Book.SixthBook);
+            decimal totalPrice = order.getTotalPrice();
+            Assert.AreEqual(30, totalPrice);
+        }
+
+        [Test]
+        public void WhenSixDifferentBooksInBasket_CostShouldBeWith30PercentsDiscount()
+        {
+            order.AddBook(Book.FirstBook);
+            order.AddBook(Book.SecondBook);
+            order.AddBook(Book.ThirdBook);
+            order.AddBook(Book.FourthBook);
+            order.AddBook(Book.FifthBook);
+            order.AddBook(Book.SixthBook);
+            decimal totalPrice = order.getTotalPrice();
+            Assert.AreEqual(33.6, totalPrice);
+        }
+
+        [Test]
+        public void WhenSevenDifferentBooksInBasket_CostShouldBeWith35PercentsDiscount()
+        {
+            order.AddBook(Book.FirstBook);
+            order.AddBook(Book.SecondBook);
+            order.AddBook(Book.ThirdBook);
+            order.AddBook(Book.FourthBook);
+            order.AddBook(Book.FifthBook);
+            order.AddBook(Book.SixthBook);
+            order.AddBook(Book.SeventhBook);
+            decimal totalPrice = order.getTotalPrice();
+            Assert.AreEqual(36.4, totalPrice);
+        }
+
+        [Test]
+        public void WhenSixDifferentBooksWithSomeRepeatsInBasket_OnlyCostOfFirstCopiesOfBooksShouldBeWith30PercentsDiscount()
+        {
+            order.AddBook(Book.FirstBook);
+            order.AddBook(Book.SecondBook, 2);
+            order.AddBook(Book.ThirdBook, 2);
+            order.AddBook(Book.FourthBook, 2);
+            order.AddBook(Book.FifthBook, 2);
+            order.AddBook(Book.SixthBook);
+            decimal totalPrice = order.getTotalPrice();
+            Assert.AreEqual(65.6, totalPrice);
         }
     }
 }
