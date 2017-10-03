@@ -18,12 +18,12 @@ namespace PotterBookstore
             this.price = price;
         }
  
-        public int GetProductPrice
+        public int Price
         {
             get { return price; }
         }
 
-        public string GetProductName
+        public string Name
         {
             get { return name; }
         }

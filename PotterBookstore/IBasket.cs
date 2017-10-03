@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace PotterBookstore
 {
-    public interface IProduct
+    public interface IBasket
     {
-        int Price { get; }
+        Dictionary<IProduct, int> GetBasketProducts { get; }
 
-        string Name { get; }
+        void AddProduct(IProduct product, int amount = 1);
     }
 }

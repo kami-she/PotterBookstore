@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace PotterBookstore
 {
-    public interface IProduct
+    public interface IPriceCalculator
     {
-        int Price { get; }
-
-        string Name { get; }
+        decimal GetTotalPrice();
     }
 }
