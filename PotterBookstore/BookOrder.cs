@@ -10,20 +10,21 @@ namespace PotterBookstore
     {
         private const int OneBookPrice = 8;
 
-        private readonly List<Book> books = new List<Book>();
+        private readonly Dictionary<Book, int> books = new Dictionary<Book, int>();
 
         public double getTotalPrice()
         {
             double totalPrice = 0;
-            int numberOfBooks = books.Count;
 
-            HashSet<Book> booksWithoutRepeats = new HashSet<Book>(books);
-            int numberOfUniqueBooks = booksWithoutRepeats.Count;
+            int numberOfUniqueBooks = GetNumberOfUniqueBooks();
 
-            if (numberOfUniqueBooks == 2)
-                totalPrice += numberOfUniqueBooks * OneBookPrice * 0.95;
+            if (numberOfUniqueBooks > 1)
+            {
+                double discountSize = 1 - 0.05 * (numberOfUniqueBooks - 1);
+                totalPrice += numberOfUniqueBooks * OneBookPrice * discountSize;
+            }
 
-            int numberOfBooksWithoutDiscount = books.Count;
+            int numberOfBooksWithoutDiscount = GetNumberOfBooks();
 
             if (numberOfUniqueBooks > 1)
                 numberOfBooksWithoutDiscount -= numberOfUniqueBooks;
@@ -35,7 +36,24 @@ namespace PotterBookstore
 
         public void AddBook(Book book)
         {
-            books.Add(book);
+            if (books.ContainsKey(book))
+            {
+                books[book]++;
+            }
+            else
+            {
+                books.Add(book, 1);
+            }
+        }
+
+        private int GetNumberOfBooks()
+        {
+            return books.Sum(x => x.Value);
+        }
+
+        public int GetNumberOfUniqueBooks()
+        {
+            return books.Count;
         }
     }
 }

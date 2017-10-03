@@ -62,6 +62,25 @@ namespace PotterBookstore.Tests
             Assert.AreEqual(31.2, totalPrice);
         }
 
+        [Test]
+        public void WhenThreeDifferentBooksInBasket_CostShouldBeWith10PercentsDiscount()
+        {
+            order.AddBook(Book.FirstBook);
+            order.AddBook(Book.SecondBook);
+            order.AddBook(Book.ThirdBook);
+            double totalPrice = order.getTotalPrice();
+            Assert.AreEqual(21.6, totalPrice);
+        }
 
+        [Test]
+        public void WhenFourDifferentBooksInBasket_CostShouldBeWith20PercentsDiscount()
+        {
+            order.AddBook(Book.FirstBook);
+            order.AddBook(Book.SecondBook);
+            order.AddBook(Book.ThirdBook);
+            order.AddBook(Book.SixthBook);
+            double totalPrice = order.getTotalPrice();
+            Assert.AreEqual(27.2, totalPrice);
+        }
     }
 }
