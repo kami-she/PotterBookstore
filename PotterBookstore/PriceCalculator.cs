@@ -8,26 +8,28 @@ namespace PotterBookstore
 {
     public class PriceCalculator : IPriceCalculator
     {
-        private readonly Dictionary<IProduct, int> products;
+        private readonly IBasket basket;
 
         private readonly IDiscountHelper discountHelper;
 
-        public PriceCalculator(Dictionary<IProduct, int> products)
+        public PriceCalculator(IBasket basket, IDiscountHelper discountHelper)
         {
-            this.products = products;
-            discountHelper = new PotterDiscountHelper();
+            this.basket = basket;
+            this.discountHelper = discountHelper;
         }
 
         public decimal GetTotalPrice()
         {
             decimal totalPrice = 0;
-            int uniqueProductsCount = products.Count;
+
+            Dictionary<IProduct, int> basketProducts = basket.GetBasketProducts;
+            int uniqueProductsCount = basketProducts.Count;
 
             decimal discountSize = discountHelper.GetDiscount(uniqueProductsCount);
 
-            foreach (var key in products.Keys)
+            foreach (var key in basketProducts.Keys)
             {
-                totalPrice += key.Price * (1 - discountSize);
+                totalPrice += key.Price * (basketProducts[key] - discountSize);
             }
 
             return totalPrice;

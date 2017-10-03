@@ -55,6 +55,7 @@
     <Compile Include="BasketTests.cs" />
     <Compile Include="PotterBookProductGenerator.cs" />
     <Compile Include="PotterDiscountHelperTests.cs" />
+    <Compile Include="PriceCalculatorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
