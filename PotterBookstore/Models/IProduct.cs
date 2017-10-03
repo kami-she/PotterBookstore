@@ -6,14 +6,10 @@ using System.Threading.Tasks;
 
 namespace PotterBookstore
 {
-    public enum Book
+    public interface IProduct
     {
-        FirstBook = 1,
-        SecondBook,
-        ThirdBook,
-        FourthBook,
-        FifthBook,
-        SixthBook,
-        SeventhBook
+        int GetProductPrice { get; }
+
+        string GetProductName { get; }
     }
 }

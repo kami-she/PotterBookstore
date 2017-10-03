@@ -7,7 +7,7 @@ namespace PotterBookstore
     {
         private const int OneBookPrice = 8;
 
-        private readonly Dictionary<Book, int> books = new Dictionary<Book, int>();
+        private readonly Dictionary<IProduct, int> books = new Dictionary<IProduct, int>();
 
         public decimal getTotalPrice()
         {
@@ -33,12 +33,12 @@ namespace PotterBookstore
                 numberOfBooksWithoutDiscount -= numberOfUniqueBooks;
             }
 
-            totalPrice += numberOfBooksWithoutDiscount * 8;
+            totalPrice += numberOfBooksWithoutDiscount * OneBookPrice;
 
             return totalPrice;
         }
 
-        public void AddBook(Book book, int amount = 1)
+        public void AddBook(IProduct book, int amount = 1)
         {
             if (books.ContainsKey(book))
             {
