@@ -34,12 +34,14 @@ namespace PotterBookstore.Tests
         }
 
         [Test]
-        public void WhenTwoDifferentBooksInBasket_CostShouldBe16Dollars()
+        public void WhenTwoSameBooksInBasket_CostShouldBe16Dollars()
         {
             order.AddBook(Book.FirstBook);
-            order.AddBook(Book.ThirdBook);
+            order.AddBook(Book.FirstBook);
             int totalPrice = order.getTotalPrice();
             Assert.AreEqual(16, totalPrice);
         }
+
+
     }
 }
