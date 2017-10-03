@@ -5,7 +5,7 @@ namespace PotterBookstore
 {
     public class PotterDiscountHelper : IDiscountHelper
     {
-        private readonly Dictionary<int, decimal> discounts = new Dictionary<int, decimal>
+        private readonly Dictionary<int, decimal> _discounts = new Dictionary<int, decimal>
         {
             {0, 0},
             {1, 0},
@@ -17,12 +17,14 @@ namespace PotterBookstore
             {7, 0.35m},
         };
 
-        public decimal GetDiscount(int productCount)
+        public decimal GetDiscount(int uniqueProductCount)
         {
-            if (!discounts.ContainsKey(productCount))
-                throw new InvalidOperationException("No discounts found for this number of different books");
+            if (!_discounts.ContainsKey(uniqueProductCount))
+            { 
+                throw new InvalidOperationException("No discount found for this number of different books");
+            }
 
-            return discounts[productCount];
+            return _discounts[uniqueProductCount];
         }
     }
 }

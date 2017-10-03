@@ -5,22 +5,22 @@ namespace PotterBookstore.Tests
     [TestFixture]
     public class BasketTests
     {
-        private Basket underTest;
+        private Basket _underTest;
 
         [SetUp]
         public void SetUp()
         {
-            underTest = new Basket();
+            _underTest = new Basket();
         }
 
         [Test]
         public void WhenAddProductToBasket_ShouldReturnCorrectProductsCount()
         {
-            Assert.AreEqual(0, underTest.GetBasketProducts.Count);
+            Assert.AreEqual(0, _underTest.GetBasketProducts.Count);
 
-            underTest.AddProduct(PotterBookProductGenerator.bookList[0]);
+            _underTest.AddProduct(PotterBookProductGenerator.BookList[0]);
 
-            Assert.AreEqual(1, underTest.GetBasketProducts.Count);
+            Assert.AreEqual(1, _underTest.GetBasketProducts.Count);
         }
     }
 }

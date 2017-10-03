@@ -1,18 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using PotterBookstore.Models;
 
 namespace PotterBookstore.Tests
 {
     public static class PotterBookProductGenerator
     {
-        public static List<BookProduct> bookList;
+        public static List<BookProduct> BookList;
 
         static PotterBookProductGenerator()
         {
-            bookList = new List<BookProduct>()
+            BookList = new List<BookProduct>()
             {
                 new BookProduct("FirstBook", 8),
                 new BookProduct("SecondBook", 8),

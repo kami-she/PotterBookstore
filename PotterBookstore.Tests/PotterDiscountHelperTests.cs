@@ -1,27 +1,23 @@
-﻿using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
+using NUnit.Framework;
 
 namespace PotterBookstore.Tests
 {
     [TestFixture]
     public class PotterDiscountHelperTests
     {
-        private PotterDiscountHelper underTest;
+        private PotterDiscountHelper _underTest;
 
         [SetUp]
         public void SetUp()
         {
-            underTest = new PotterDiscountHelper();
+            _underTest = new PotterDiscountHelper();
         }
 
         [Test]
         public void WhenProductCountIsInDiscountHelper_ShouldReturnCorrectDiscount()
         {
-            decimal result = underTest.GetDiscount(2);
+            decimal result = _underTest.GetDiscount(2);
 
             Assert.AreEqual(0.05, result);
         }
@@ -29,7 +25,7 @@ namespace PotterBookstore.Tests
         [Test]
         public void WhenProductCountIsNotInDiscountHelper_ShouldThrowException()
         {
-            Assert.Throws<InvalidOperationException>(() => underTest.GetDiscount(10));
+            Assert.Throws<InvalidOperationException>(() => _underTest.GetDiscount(10));
         }
     }
 }

@@ -1,38 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PotterBookstore
+﻿namespace PotterBookstore.Models
 {
     public class BookProduct : IProduct
     {
-        private string name;
+        private readonly string _name;
 
-        private decimal price;
+        private readonly decimal _price;
 
         public BookProduct(string name, int price)
         {
-            this.name = name;
-            this.price = price;
+            _name = name;
+            _price = price;
         }
  
-        public decimal Price
-        {
-            get { return price; }
-        }
+        public decimal Price => _price;
 
-        public string Name
-        {
-            get { return name; }
-        }
+        public string Name => _name;
 
         public override bool Equals(object obj)
         {
-            if (obj.GetType() != typeof(BookProduct)) return false;
-            var book = (BookProduct)obj;
-            return this.Name == book.Name && this.Price == book.Price;
+            if (obj == null)
+                return false;
+
+            var book = obj as BookProduct;
+
+            if (book == null)
+                return false;
+
+            return Name == book.Name && Price == book.Price;
         }
 
         public override int GetHashCode()

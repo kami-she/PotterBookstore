@@ -1,31 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PotterBookstore
+﻿namespace PotterBookstore
 {
     public class PriceCalculator : IPriceCalculator
     {
-        private readonly IBasket basket;
+        private readonly IBasket _basket;
 
-        private readonly IDiscountHelper discountHelper;
+        private readonly IDiscountHelper _discountHelper;
 
         public PriceCalculator(IBasket basket, IDiscountHelper discountHelper)
         {
-            this.basket = basket;
-            this.discountHelper = discountHelper;
+            _basket = basket;
+            _discountHelper = discountHelper;
         }
 
         public decimal GetTotalPrice()
         {
             decimal totalPrice = 0;
 
-            Dictionary<IProduct, int> basketProducts = basket.GetBasketProducts;
-            int uniqueProductsCount = basketProducts.Count;
+            var basketProducts = _basket.GetBasketProducts;
+            var uniqueProductsCount = basketProducts.Count;
 
-            decimal discountSize = discountHelper.GetDiscount(uniqueProductsCount);
+            var discountSize = _discountHelper.GetDiscount(uniqueProductsCount);
 
             foreach (var key in basketProducts.Keys)
             {
