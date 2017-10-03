@@ -29,8 +29,6 @@ namespace PotterBookstore.Tests
         [Test]
         public void WhenProductCountIsNotInDiscountHelper_ShouldThrowException()
         {
-            decimal result = underTest.GetDiscount(2);
-
             Assert.Throws<InvalidOperationException>(() => underTest.GetDiscount(10));
         }
     }
